@@ -2,7 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, GraduationCap, BookOpen, CreditCard, PieChart, Settings, LogOut } from 'lucide-react';
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen: boolean;
+  onNavigate: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate }) => {
   const menuItems = [
     { text: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5 mr-3" />, path: '/' },
     { text: 'Teachers', icon: <Users className="w-5 h-5 mr-3" />, path: '/teachers' },
@@ -14,7 +19,13 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-64 bg-gray-800 text-white flex flex-col">
+    <aside
+      className={
+        `fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 text-white flex flex-col transform transition-transform duration-200 ` +
+        `lg:static lg:translate-x-0 ` +
+        (isOpen ? 'translate-x-0' : '-translate-x-full')
+      }
+    >
       <div className="flex items-center justify-center h-20 border-b border-gray-700">
         <h1 className="text-2xl font-bold">KG2PG Admin</h1>
       </div>
@@ -28,6 +39,7 @@ const Sidebar: React.FC = () => {
               `flex items-center px-4 py-2 rounded-md ` +
               (isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white')
             }
+            onClick={onNavigate}
           >
             {item.icon}
             {item.text}

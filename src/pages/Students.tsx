@@ -18,6 +18,7 @@ const Students: React.FC = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-md w-full">
+      <div className="p-6">
         <div className="px-6 py-4 border-b flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-800">Manage Students</h3>
           <div className="flex items-center space-x-2">
@@ -67,6 +68,7 @@ const Students: React.FC = () => {
             <a href="#" className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">2</a>
             <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">Next</a>
           </div>
+        </div>
         </div>
       </div>
   );
