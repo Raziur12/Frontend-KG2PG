@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signin: React.FC = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +12,10 @@ const Signin: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Signin attempt:', { email, password, rememberMe });
+
+    // TODO: add real authentication here
+    // For now, navigate directly to dashboard layout
+    navigate('/app', { replace: true });
   };
 
   return (

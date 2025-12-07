@@ -9,13 +9,13 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate }) => {
   const menuItems = [
-    { text: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5 mr-3" />, path: '/' },
-    { text: 'Teachers', icon: <Users className="w-5 h-5 mr-3" />, path: '/teachers' },
-    { text: 'Students', icon: <GraduationCap className="w-5 h-5 mr-3" />, path: '/students' },
-    { text: 'Classes', icon: <BookOpen className="w-5 h-5 mr-3" />, path: '/classes' },
-    { text: 'Payments', icon: <CreditCard className="w-5 h-5 mr-3" />, path: '/payments' },
-    { text: 'Reports', icon: <PieChart className="w-5 h-5 mr-3" />, path: '/reports' },
-    { text: 'Settings', icon: <Settings className="w-5 h-5 mr-3" />, path: '/settings' },
+    { text: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5 mr-3" />, path: '/app' },
+    { text: 'Teachers', icon: <Users className="w-5 h-5 mr-3" />, path: '/app/teachers' },
+    { text: 'Students', icon: <GraduationCap className="w-5 h-5 mr-3" />, path: '/app/students' },
+    { text: 'Classes', icon: <BookOpen className="w-5 h-5 mr-3" />, path: '/app/classes' },
+    { text: 'Payments', icon: <CreditCard className="w-5 h-5 mr-3" />, path: '/app/payments' },
+    { text: 'Reports', icon: <PieChart className="w-5 h-5 mr-3" />, path: '/app/reports' },
+    { text: 'Settings', icon: <Settings className="w-5 h-5 mr-3" />, path: '/app/settings' },
   ];
 
   return (

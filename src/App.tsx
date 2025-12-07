@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Teachers from './pages/Teachers';
@@ -14,9 +14,13 @@ import Signup from './pages/Signup';
 const App: React.FC = () => {
   return (
     <Routes>
+      {/* Default route: show signin */}
+      <Route path="/" element={<Signin />} />
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/" element={<Layout />}>
+
+      {/* Protected app layout under /app */}
+      <Route path="/app" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="teachers" element={<Teachers />} />
         <Route path="students" element={<Students />} />
@@ -25,6 +29,9 @@ const App: React.FC = () => {
         <Route path="reports" element={<Reports />} />
         <Route path="settings" element={<Settings />} />
       </Route>
+
+      {/* Fallback: unknown URLs go to signin */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

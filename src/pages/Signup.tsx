@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup: React.FC = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,7 +26,18 @@ const Signup: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert('Password and Confirm Password do not match.');
+      return;
+    }
+
     console.log('Signup attempt:', formData);
+
+    // Yahan normally API call karke user create karte.
+    // Abhi ke liye frontend demo: success message + redirect to signin.
+    alert('Account created successfully! Please sign in.');
+    navigate('/signin', { replace: true });
   };
 
   return (
