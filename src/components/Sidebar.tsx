@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, GraduationCap, BookOpen, CreditCard, PieChart, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, BookOpen, CreditCard, PieChart, Settings, LogOut, UniversityIcon, Languages as LanguagesIcon, Globe2, FileText, BadgeCheck } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -13,6 +13,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate }) => {
     { text: 'Teachers', icon: <Users className="w-5 h-5 mr-3" />, path: '/app/teachers' },
     { text: 'Students', icon: <GraduationCap className="w-5 h-5 mr-3" />, path: '/app/students' },
     { text: 'Classes', icon: <BookOpen className="w-5 h-5 mr-3" />, path: '/app/classes' },
+    { text: 'University', icon: <GraduationCap className="w-5 h-5 mr-3" />, path: '/app/university' },
+    { text: 'Languages', icon: <BookOpen className="w-5 h-5 mr-3" />, path: '/app/languages' },
+    { text: 'Abroad Exam (MBBS)', icon: <Globe2 className="w-5 h-5 mr-3" />, path: '/app/abroad-exam-mbbs' },
+    { text: 'Fees', icon: <CreditCard className="w-5 h-5 mr-3" />, path: '/app/fees' },
+    { text: 'College Profile', icon: <FileText className="w-5 h-5 mr-3" />, path: '/app/college-profile' },
+    { text: 'Certificate', icon: <BadgeCheck className="w-5 h-5 mr-3" />, path: '/app/certificate' },
     { text: 'Payments', icon: <CreditCard className="w-5 h-5 mr-3" />, path: '/app/payments' },
     { text: 'Reports', icon: <PieChart className="w-5 h-5 mr-3" />, path: '/app/reports' },
     { text: 'Settings', icon: <Settings className="w-5 h-5 mr-3" />, path: '/app/settings' },
