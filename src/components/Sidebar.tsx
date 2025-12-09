@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, GraduationCap, BookOpen, CreditCard, PieChart, Settings, LogOut, UniversityIcon, Languages as LanguagesIcon, Globe2, FileText, BadgeCheck } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, BookOpen, CreditCard, PieChart, Settings, LogOut, Globe2, FileText, BadgeCheck } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
