@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 w-full">
+    <div className="flex h-screen bg-gray-100 w-full overflow-hidden">
       {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onNavigate={handleCloseSidebar} />
 
@@ -28,10 +28,10 @@ const Layout: React.FC = () => {
       )}
 
       {/* Main content */}
-      <div className="flex flex-col flex-1 z-10">
+      <div className="flex flex-col flex-1 z-10 h-full">
         <Header onMenuClick={handleToggleSidebar} />
-        <main className="flex-1 w-full">
-            <Outlet />
+        <main className="flex-1 w-full overflow-y-auto">
+          <Outlet />
         </main>
       </div>
     </div>

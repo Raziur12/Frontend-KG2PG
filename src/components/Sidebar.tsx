@@ -32,10 +32,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onNavigate }) => {
         (isOpen ? 'translate-x-0' : '-translate-x-full')
       }
     >
-      <div className="flex items-center justify-center h-20 border-b border-gray-700">
+      <div className="flex items-center h-20 px-4 sm:px-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold">KG2PG Admin</h1>
       </div>
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
