@@ -14,8 +14,9 @@ const Signin: React.FC = () => {
     console.log('Signin attempt:', { email, password, rememberMe });
 
     // TODO: add real authentication here
-    // For now, navigate directly to dashboard layout
-    navigate('/app', { replace: true });
+    // navigate('/app', { replace: true });
+    // For now, navigate directly to USER dashboard layout
+    navigate('/user', { replace: true });
   };
 
   return (
