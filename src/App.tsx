@@ -16,6 +16,11 @@ import CollegeProfile from './pages/CollegeProfile';
 import Certificate from './pages/Certificate';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import UserHome from './pages/user/UserHome';
+import UserCourses from './pages/user/UserCourses';
+import UserUniversities from './pages/user/UserUniversities';
+import UserFees from './pages/user/UserFees';
+import UserProfile from './pages/user/UserProfile';
 
 const App: React.FC = () => {
   return (
@@ -41,6 +46,13 @@ const App: React.FC = () => {
         <Route path="college-profile" element={<CollegeProfile />} />
         <Route path="certificate" element={<Certificate />} />
       </Route>
+
+      {/* ✅ User routes अलग, root level पर */}
+      <Route path="/user" element={<UserHome />} />
+      <Route path="/user/courses" element={<UserCourses />} />
+      <Route path="/user/universities" element={<UserUniversities />} />
+      <Route path="/user/fees" element={<UserFees />} />
+      <Route path="/user/profile" element={<UserProfile />} />
 
       {/* Fallback: unknown URLs go to signin */}
       <Route path="*" element={<Navigate to="/" replace />} />
