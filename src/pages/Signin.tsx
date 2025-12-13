@@ -19,8 +19,18 @@ const Signin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
+    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 to-purple-700">
+      {/* Background student image */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt="Students learning together"
+          className="w-full h-full object-cover object-center opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/60 via-blue-700/50 to-purple-900/60" />
+      </div>
+
+      <div className="relative max-w-6xl w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
         {/* Left Section - Branding */}
         <div className="flex-1 text-center lg:text-left text-white">
           <div className="mb-8">
