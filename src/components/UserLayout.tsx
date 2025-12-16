@@ -36,22 +36,24 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
             <header className="fixed top-0 inset-x-0 z-30 border-b border-slate-950 bg-slate-950 text-slate-100 shadow-md">
                 <div className="max-w-6xl mx-auto pl-0 pr-4 md:pl-0 md:pr-6 h-16 md:h-20 flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                        {/* Mobile menu button */}
-                        <button
-                            type="button"
-                            className="md:hidden text-slate-200 hover:text-white"
-                            onClick={toggleNav}
-                        >
-                            {isNavOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                        </button>
-                        <div className="flex flex-col leading-tight">
+                        <div className="flex flex-col leading-tight p-5">
                             <span className="text-xl md:text-2xl font-extrabold tracking-wide text-amber-400">KG2PG</span>
                             <span className="hidden sm:inline text-xs md:text-sm text-slate-200/80 whitespace-nowrap">Student Portal</span>
                         </div>
                     </div>
 
-                    {/* Desktop nav links */}
-                    <nav className="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-100/80 ml-6">
+                    <div className="flex items-center">
+                        {/* Mobile menu button on right */}
+                        <button
+                            type="button"
+                            className="md:hidden mr-1 flex items-center justify-center h-9 w-9 rounded-full border border-slate-700 bg-slate-900/80 text-slate-100 hover:bg-slate-800 hover:border-slate-500"
+                            onClick={toggleNav}
+                        >
+                            {isNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        </button>
+
+                        {/* Desktop nav links */}
+                        <nav className="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-100/80 ml-6">
 
                         <a href="/user" className="hover:text-amber-400">Home</a>
                         <a href="/user/about-us" className="hover:text-amber-400">About Us</a>
@@ -222,6 +224,7 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                             )}
                         </div>
                     </nav>
+                    </div>
                 </div>
 
                 {/* Mobile nav dropdown (accordion style) */}
