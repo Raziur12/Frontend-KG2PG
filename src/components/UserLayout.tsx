@@ -297,11 +297,11 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                             </button>
                             {isProfileOpen && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-slate-200 rounded shadow-lg px-6 py-3 text-sm w-max z-40"
+                                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max rounded-md bg-white border border-slate-200 shadow-lg px-4 py-2 text-sm text-slate-800"
                                     onMouseEnter={() => openMenu('profile', setIsProfileOpen)}
                                     onMouseLeave={() => closeMenuWithDelay('profile', setIsProfileOpen)}
                                 >
-                                    <div className="flex items-center gap-x-10 whitespace-nowrap">
+                                    <div className="flex flex-col gap-y-2 whitespace-nowrap">
                                         <a href="/user/profile" className="block hover:text-amber-500">My Profile</a>
                                         <a href="/user/profile/settings" className="block hover:text-amber-500">Settings</a>
                                         <a href="/logout" className="block hover:text-amber-500">Logout</a>
