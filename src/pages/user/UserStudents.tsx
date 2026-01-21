@@ -32,14 +32,26 @@ const UserStudents: React.FC = () => {
 
   return (
     <UserLayout>
-      <main className="space-y-8">
+      <main className="space-y-8 kg-fade-in">
         {/* Intro section */}
         <section className="mb-2">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">Students & Parents</h1>
-          <p className="mt-3 text-sm md:text-base text-gray-600 max-w-3xl">
-            This page is a demo view for students and parents using the KG2PG portal. You can later connect it to
-            real onboarding flows, counselling forms and class recommendations.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">Students & Parents</h1>
+              <p className="mt-3 text-sm md:text-base text-gray-600 max-w-3xl">
+                This page is a demo view for students and parents using the KG2PG portal. You can later connect it to
+                real onboarding flows, counselling forms and class recommendations.
+              </p>
+            </div>
+            <div>
+              <Link
+                to="/user/students/list"
+                className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50"
+              >
+                View Students List
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* Journey cards */}

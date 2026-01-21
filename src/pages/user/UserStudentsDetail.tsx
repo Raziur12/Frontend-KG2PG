@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import UserLayout from '../../components/UserLayout';
 
 const SEGMENTS = [
@@ -92,7 +92,17 @@ const UserStudentsDetail: React.FC = () => {
     <UserLayout>
       <main className="space-y-6 md:space-y-8">
         <section>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">{current.label}</h1>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <Link
+                to="/user/students"
+                className="inline-flex items-center rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+              >
+                Back
+              </Link>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">{current.label}</h1>
+            </div>
+          </div>
           <p className="mt-2 text-sm md:text-base text-gray-600 max-w-3xl">
             Demo view showing how you can describe programs and support for this stage. Use the left menu to switch
             between different student classes.

@@ -1,58 +1,54 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserLayout from '../../components/UserLayout';
-import type { Teacher } from '../../types/teacher';
+import type { Student } from '../../types/student';
 
-const UserTeachersAll: React.FC = () => {
+const UserStudentsList: React.FC = () => {
   const [q, setQ] = useState('');
 
-  const teachers: Teacher[] = [
+  const students: Student[] = [
     {
-      id: 'neha-sharma',
-      name: 'Dr. Neha Sharma',
-      headline: 'Biology Mentor • NEET Specialist',
-      subjects: ['Biology'],
-      experienceYears: 10,
-      mode: 'offline',
+      id: 'amit-singh',
+      name: 'Amit Singh',
+      email: 'amit.s@example.com',
+      phone: '+91 98765 43210',
+      grade: 'Class 12',
+      targetExams: ['NEET'],
+      goals: ['MBBS in India'],
       address: { city: 'Pune', state: 'Maharashtra', country: 'India' },
-      rating: { average: 4.8, count: 120 },
-      verified: true,
       createdAt: new Date().toISOString(),
     },
     {
-      id: 'rahul-mehta',
-      name: 'Rahul Mehta',
-      headline: 'Physics Faculty • Mechanics & Electricity',
-      subjects: ['Physics'],
-      experienceYears: 8,
-      mode: 'hybrid',
-      address: { city: 'Kota', state: 'Rajasthan', country: 'India' },
-      rating: { average: 4.6, count: 95 },
-      verified: true,
+      id: 'sara-khan',
+      name: 'Sara Khan',
+      email: 'sara.k@example.com',
+      phone: '+91 91234 56789',
+      grade: 'Class 10',
+      goals: ['Strong foundation in Maths & Science'],
+      address: { city: 'Lucknow', state: 'Uttar Pradesh', country: 'India' },
       createdAt: new Date().toISOString(),
     },
     {
-      id: 'anjali-verma',
-      name: 'Anjali Verma',
-      headline: 'Chemistry Faculty • Organic Made Easy',
-      subjects: ['Chemistry'],
-      experienceYears: 7,
-      mode: 'offline',
+      id: 'rohit-verma',
+      name: 'Rohit Verma',
+      email: 'rohit.v@example.com',
+      phone: '+91 90123 45678',
+      grade: 'Class 11',
+      targetExams: ['JEE'],
+      goals: ['IIT – Computer Science'],
       address: { city: 'Delhi', state: 'Delhi', country: 'India' },
-      rating: { average: 4.5, count: 80 },
-      verified: true,
       createdAt: new Date().toISOString(),
     },
   ];
 
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
-    if (!term) return teachers;
-    return teachers.filter((t) => {
-      const hay = [t.name, t.headline ?? '', t.subjects.join(' '), t.address?.city ?? ''].join(' ').toLowerCase();
+    if (!term) return students;
+    return students.filter((s) => {
+      const hay = [s.name, s.grade ?? '', (s.targetExams ?? []).join(' '), s.address?.city ?? ''].join(' ').toLowerCase();
       return hay.includes(term);
     });
-  }, [q, teachers]);
+  }, [q, students]);
 
   return (
     <UserLayout>
@@ -60,16 +56,16 @@ const UserTeachersAll: React.FC = () => {
         <section>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900">All Teachers</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900">Students List</h1>
               <p className="mt-2 text-sm md:text-base text-slate-600 max-w-3xl">
-                Browse teacher profiles with search and quick details. Click any card to open the full profile.
+                Demo list of students. Click any card to open the student profile.
               </p>
             </div>
             <div className="w-full md:w-[360px]">
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Search by name, subject, city..."
+                placeholder="Search by name, class, exam, city..."
                 className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
@@ -77,70 +73,54 @@ const UserTeachersAll: React.FC = () => {
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {filtered.map((t, idx) => (
+          {filtered.map((s) => (
             <Link
-              key={t.id}
-              to={`/user/teachers/${t.id}`}
+              key={s.id}
+              to={`/user/students/profile/${s.id}`}
               className="group bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex flex-col hover:shadow-md hover:border-slate-300 transition-all duration-200"
-              style={{ animationDelay: `${idx * 60}ms` }}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="h-12 w-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold">
-                  {t.name
+                  {s.name
                     .split(' ')
                     .slice(0, 2)
                     .map((n) => n[0])
                     .join('')}
                 </div>
-                <div className="flex items-center gap-2">
-                  {t.verified && (
-                    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-                      Verified
-                    </span>
-                  )}
-                </div>
+                <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
+                  {s.grade ?? '—'}
+                </span>
               </div>
 
               <h2 className="mt-3 text-sm md:text-base font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                {t.name}
+                {s.name}
               </h2>
-              {t.headline && <p className="mt-1 text-xs md:text-sm text-slate-600">{t.headline}</p>}
 
               <div className="mt-3 flex flex-wrap gap-2">
-                {t.subjects.slice(0, 2).map((s) => (
+                {(s.targetExams ?? []).slice(0, 2).map((e) => (
                   <span
-                    key={s}
+                    key={e}
                     className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-700"
                   >
-                    {s}
+                    {e}
                   </span>
                 ))}
                 <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
-                  {t.mode}
+                  {s.address?.city ?? '—'}
                 </span>
               </div>
 
               <div className="mt-3 text-[12px] text-slate-600">
                 <p>
-                  <span className="font-semibold text-slate-700">City:</span> {t.address?.city ?? '—'}
-                </p>
-                <p>
-                  <span className="font-semibold text-slate-700">Experience:</span>{' '}
-                  {t.experienceYears ? `${t.experienceYears}+ yrs` : '—'}
+                  <span className="font-semibold text-slate-700">Goals:</span> {(s.goals ?? []).slice(0, 1).join(', ') || '—'}
                 </p>
               </div>
-
-              {t.rating && (
-                <div className="mt-3 text-[12px] text-slate-600">
-                  <span className="font-semibold text-slate-700">Rating:</span> {t.rating.average.toFixed(1)} / 5 ({t.rating.count})
-                </div>
-              )}
             </Link>
           ))}
 
           {filtered.length === 0 && (
             <div className="md:col-span-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700">
-              No teachers found for “{q}”.
+              No students found for “{q}”.
             </div>
           )}
         </section>
@@ -149,4 +129,4 @@ const UserTeachersAll: React.FC = () => {
   );
 };
 
-export default UserTeachersAll;
+export default UserStudentsList;

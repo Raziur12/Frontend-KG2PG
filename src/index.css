@@ -62,6 +62,21 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+@keyframes kg-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kg-fade-in {
+  animation: kg-fade-in 260ms ease-out both;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

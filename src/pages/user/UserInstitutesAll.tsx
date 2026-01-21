@@ -1,58 +1,69 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserLayout from '../../components/UserLayout';
-import type { Teacher } from '../../types/teacher';
+import type { Institute } from '../../types/institute';
 
-const UserTeachersAll: React.FC = () => {
+const UserInstitutesAll: React.FC = () => {
   const [q, setQ] = useState('');
 
-  const teachers: Teacher[] = [
+  const institutes: Institute[] = [
     {
-      id: 'neha-sharma',
-      name: 'Dr. Neha Sharma',
-      headline: 'Biology Mentor • NEET Specialist',
-      subjects: ['Biology'],
-      experienceYears: 10,
-      mode: 'offline',
+      id: 'kg2pg-guidance-center',
+      name: 'KG2PG Guidance Center',
+      category: 'consultancy',
+      description: 'Demo institute profile for counselling, admissions support, and mentorship services.',
+      services: ['Career Counselling', 'Admission Guidance', 'Document Support'],
+      programs: ['MBBS Counselling', 'Engineering Counselling'],
       address: { city: 'Pune', state: 'Maharashtra', country: 'India' },
-      rating: { average: 4.8, count: 120 },
+      feeRange: { min: 999, max: 9999, currency: 'INR', unit: 'course' },
+      rating: { average: 4.7, count: 320 },
       verified: true,
       createdAt: new Date().toISOString(),
     },
     {
-      id: 'rahul-mehta',
-      name: 'Rahul Mehta',
-      headline: 'Physics Faculty • Mechanics & Electricity',
-      subjects: ['Physics'],
-      experienceYears: 8,
-      mode: 'hybrid',
+      id: 'prime-test-prep',
+      name: 'Prime Test Prep Institute',
+      category: 'training',
+      description: 'Demo institute focused on test prep and practice materials.',
+      services: ['Test Series', 'Mock Interviews', 'Doubt Solving'],
+      programs: ['NEET Test Series', 'JEE Test Series'],
       address: { city: 'Kota', state: 'Rajasthan', country: 'India' },
-      rating: { average: 4.6, count: 95 },
+      feeRange: { min: 1999, max: 19999, currency: 'INR', unit: 'course' },
+      rating: { average: 4.5, count: 210 },
       verified: true,
       createdAt: new Date().toISOString(),
     },
     {
-      id: 'anjali-verma',
-      name: 'Anjali Verma',
-      headline: 'Chemistry Faculty • Organic Made Easy',
-      subjects: ['Chemistry'],
-      experienceYears: 7,
-      mode: 'offline',
+      id: 'bright-foundation-school',
+      name: 'Bright Foundation Institute',
+      category: 'training',
+      description: 'K-12 foundation learning and mentorship in small batches.',
+      services: ['Concept Classes', 'Practice Sheets', 'Parent Mentoring'],
+      programs: ['Class 8-10 Foundation', 'Class 11-12 Science'],
       address: { city: 'Delhi', state: 'Delhi', country: 'India' },
-      rating: { average: 4.5, count: 80 },
-      verified: true,
+      feeRange: { min: 15000, max: 65000, currency: 'INR', unit: 'course' },
+      rating: { average: 4.6, count: 145 },
+      verified: false,
       createdAt: new Date().toISOString(),
     },
   ];
 
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
-    if (!term) return teachers;
-    return teachers.filter((t) => {
-      const hay = [t.name, t.headline ?? '', t.subjects.join(' '), t.address?.city ?? ''].join(' ').toLowerCase();
+    if (!term) return institutes;
+    return institutes.filter((i) => {
+      const hay = [
+        i.name,
+        i.category ?? '',
+        (i.services ?? []).join(' '),
+        (i.programs ?? []).join(' '),
+        i.address?.city ?? '',
+      ]
+        .join(' ')
+        .toLowerCase();
       return hay.includes(term);
     });
-  }, [q, teachers]);
+  }, [q, institutes]);
 
   return (
     <UserLayout>
@@ -60,16 +71,16 @@ const UserTeachersAll: React.FC = () => {
         <section>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900">All Teachers</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900">Institutes</h1>
               <p className="mt-2 text-sm md:text-base text-slate-600 max-w-3xl">
-                Browse teacher profiles with search and quick details. Click any card to open the full profile.
+                Browse institutes and services. Click any card to open the full institute profile.
               </p>
             </div>
             <div className="w-full md:w-[360px]">
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Search by name, subject, city..."
+                placeholder="Search by name, service, city..."
                 className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-200"
               />
             </div>
@@ -77,37 +88,31 @@ const UserTeachersAll: React.FC = () => {
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {filtered.map((t, idx) => (
+          {filtered.map((i) => (
             <Link
-              key={t.id}
-              to={`/user/teachers/${t.id}`}
+              key={i.id}
+              to={`/user/institutes/${i.id}`}
               className="group bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex flex-col hover:shadow-md hover:border-slate-300 transition-all duration-200"
-              style={{ animationDelay: `${idx * 60}ms` }}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="h-12 w-12 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold">
-                  {t.name
+                  {i.name
                     .split(' ')
                     .slice(0, 2)
                     .map((n) => n[0])
                     .join('')}
                 </div>
-                <div className="flex items-center gap-2">
-                  {t.verified && (
-                    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
-                      Verified
-                    </span>
-                  )}
-                </div>
+                <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
+                  {i.category ?? '—'}
+                </span>
               </div>
 
               <h2 className="mt-3 text-sm md:text-base font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                {t.name}
+                {i.name}
               </h2>
-              {t.headline && <p className="mt-1 text-xs md:text-sm text-slate-600">{t.headline}</p>}
 
               <div className="mt-3 flex flex-wrap gap-2">
-                {t.subjects.slice(0, 2).map((s) => (
+                {(i.services ?? []).slice(0, 2).map((s) => (
                   <span
                     key={s}
                     className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-700"
@@ -116,23 +121,23 @@ const UserTeachersAll: React.FC = () => {
                   </span>
                 ))}
                 <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
-                  {t.mode}
+                  {i.address?.city ?? '—'}
                 </span>
               </div>
 
               <div className="mt-3 text-[12px] text-slate-600">
                 <p>
-                  <span className="font-semibold text-slate-700">City:</span> {t.address?.city ?? '—'}
+                  <span className="font-semibold text-slate-700">Programs:</span> {(i.programs ?? []).slice(0, 2).join(', ') || '—'}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-700">Experience:</span>{' '}
-                  {t.experienceYears ? `${t.experienceYears}+ yrs` : '—'}
+                  <span className="font-semibold text-slate-700">Fees:</span>{' '}
+                  {i.feeRange?.min || i.feeRange?.max ? `₹${i.feeRange?.min ?? '—'} - ₹${i.feeRange?.max ?? '—'}` : '—'}
                 </p>
               </div>
 
-              {t.rating && (
+              {i.rating && (
                 <div className="mt-3 text-[12px] text-slate-600">
-                  <span className="font-semibold text-slate-700">Rating:</span> {t.rating.average.toFixed(1)} / 5 ({t.rating.count})
+                  <span className="font-semibold text-slate-700">Rating:</span> {i.rating.average.toFixed(1)} / 5 ({i.rating.count})
                 </div>
               )}
             </Link>
@@ -140,7 +145,7 @@ const UserTeachersAll: React.FC = () => {
 
           {filtered.length === 0 && (
             <div className="md:col-span-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-slate-700">
-              No teachers found for “{q}”.
+              No institutes found for “{q}”.
             </div>
           )}
         </section>
@@ -149,4 +154,4 @@ const UserTeachersAll: React.FC = () => {
   );
 };
 
-export default UserTeachersAll;
+export default UserInstitutesAll;

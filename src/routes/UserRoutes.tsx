@@ -2,7 +2,8 @@
 import { Route } from 'react-router-dom';
 import UserHome from '../pages/user/UserHome';
 import UserCourses from '../pages/user/UserCourses';
-import UserUniversities from '../pages/user/UserUniversities';
+import UserUniversitiesAll from '../pages/user/UserUniversitiesAll';
+import UserUniversityDetail from '../pages/user/UserUniversityDetail';
 import UserFees from '../pages/user/UserFees';
 import UserProfile from '../pages/user/UserProfile';
 import UserProfileSettings from '../pages/user/UserProfileSettings';
@@ -27,10 +28,19 @@ import UserTeachersAll from '../pages/user/UserTeachersAll';
 import UserTeachersMy from '../pages/user/UserTeachersMy';
 import UserTeachersProfiles from '../pages/user/UserTeachersProfiles';
 import UserTeachersChat from '../pages/user/UserTeachersChat';
+import UserTeacherDetail from '../pages/user/UserTeacherDetail';
+import UserCoachingAll from '../pages/user/UserCoachingAll';
+import UserCoachingDetail from '../pages/user/UserCoachingDetail';
+import UserCollegesAll from '../pages/user/UserCollegesAll';
+import UserCollegeDetail from '../pages/user/UserCollegeDetail';
+import UserInstitutesAll from '../pages/user/UserInstitutesAll';
+import UserInstituteDetail from '../pages/user/UserInstituteDetail';
 import UserProfileExtended from '../pages/user/UserProfileExtended';
 import UserAbout from '../pages/user/UserAbout';
 import UserStudents from '../pages/user/UserStudents';
 import UserStudentsDetail from '../pages/user/UserStudentsDetail';
+import UserStudentProfileDetail from '../pages/user/UserStudentProfileDetail';
+import UserStudentsList from '../pages/user/UserStudentsList';
 import UserExamsNeet from '../pages/user/UserExamsNeet';
 import UserExamsOther from '../pages/user/UserExamsOther';
 import UserExamsJee from '../pages/user/UserExamsJee';
@@ -47,11 +57,20 @@ export const userRoutes = (
     <Route path="/user" element={<UserHome />} />
     <Route path="/user/about-us" element={<UserAbout />} />
     <Route path="/user/students" element={<UserStudents />} />
+    <Route path="/user/students/list" element={<UserStudentsList />} />
+    <Route path="/user/students/profile/:id" element={<UserStudentProfileDetail />} />
     <Route path="/user/students/:segment" element={<UserStudentsDetail />} />
     <Route path="/user/teachers" element={<UserTeachersAll />} />
+    <Route path="/user/teachers/:id" element={<UserTeacherDetail />} />
     <Route path="/user/teachers/my" element={<UserTeachersMy />} />
     <Route path="/user/teachers/profiles" element={<UserTeachersProfiles />} />
     <Route path="/user/teachers/chat" element={<UserTeachersChat />} />
+    <Route path="/user/coaching" element={<UserCoachingAll />} />
+    <Route path="/user/coaching/:id" element={<UserCoachingDetail />} />
+    <Route path="/user/colleges" element={<UserCollegesAll />} />
+    <Route path="/user/colleges/:id" element={<UserCollegeDetail />} />
+    <Route path="/user/institutes" element={<UserInstitutesAll />} />
+    <Route path="/user/institutes/:id" element={<UserInstituteDetail />} />
     <Route path="/user/exams/neet" element={<UserExamsNeet />} />
     <Route path="/user/exams/jee" element={<UserExamsJee />} />
     <Route path="/user/exams/other" element={<UserExamsOther />} />
@@ -63,7 +82,8 @@ export const userRoutes = (
     <Route path="/user/dashboard/performance" element={<UserDashboardPerformance />} />
     <Route path="/user/dashboard/reviews" element={<UserDashboardReviews />} />
     <Route path="/user/courses" element={<UserCourses />} />
-    <Route path="/user/universities" element={<UserUniversities />} />
+    <Route path="/user/universities" element={<UserUniversitiesAll />} />
+    <Route path="/user/universities/:id" element={<UserUniversityDetail />} />
     <Route path="/user/fees" element={<UserFees />} />
     <Route path="/user/profile" element={<UserProfile />} />
     <Route path="/user/profile/settings" element={<UserProfileSettings />} />
