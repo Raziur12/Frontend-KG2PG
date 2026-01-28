@@ -5,7 +5,6 @@ import type { ReactNode } from 'react';
 interface UserLayoutProps {
     children: ReactNode;
 }
-
 const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isCoursesOpen, setIsCoursesOpen] = useState(false);
@@ -118,17 +117,98 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                             </button>
                             {isKg2pgOpen && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 mt-3 bg-white border border-slate-200 rounded shadow-lg px-6 py-3 text-sm w-max z-40"
+                                    className="absolute left-1/2 -translate-x-1/2 mt-3 bg-white border border-slate-200 rounded shadow-lg px-6 py-5 text-sm w-[min(980px,calc(100vw-2rem))] z-40"
                                     onMouseEnter={() => openMenu('kg2pg', setIsKg2pgOpen)}
                                     onMouseLeave={() => closeMenuWithDelay('kg2pg', setIsKg2pgOpen)}
                                 >
-                                    <div className="flex items-center gap-x-10 whitespace-nowrap">
-                                        <a href="/user/teachers" className="block hover:text-amber-500">Teachers</a>
-                                        <a href="/user/coaching" className="block hover:text-amber-500">Coaching</a>
-                                        <a href="/user/colleges" className="block hover:text-amber-500">Colleges</a>
-                                        <a href="/user/universities" className="block hover:text-amber-500">Universities</a>
-                                        <a href="/user/institutes" className="block hover:text-amber-500">Institutes</a>
-                                        <a href="/user/students" className="block hover:text-amber-500">Students</a>
+                                    <div className="max-h-[70vh] overflow-y-auto pr-1">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-10 gap-y-6">
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Teachers</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/teachers" className="block py-2 text-slate-800 hover:text-amber-500">All Teachers</a>
+                                                    <a href="/user/teachers/my" className="block py-2 text-slate-800 hover:text-amber-500">My Teachers</a>
+                                                    <a href="/user/teachers/profiles" className="block py-2 text-slate-800 hover:text-amber-500">Teacher Profiles</a>
+                                                    <a href="/user/teachers/chat" className="block py-2 text-slate-800 hover:text-amber-500">Chat / Messages</a>
+                                                    <a href="/user/teachers" className="block py-2 text-slate-800 hover:text-amber-500">Find by Subject</a>
+                                                    <a href="/user/teachers" className="block py-2 text-slate-800 hover:text-amber-500">Find by City</a>
+                                                    <a href="/user/teachers" className="block py-2 text-slate-800 hover:text-amber-500">Top Rated Teachers</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[12px] font-extrabold tracking-[0.18em] text-slate-700 uppercase border-b border-slate-200 pb-2">
+                                                    Coaching
+                                                </div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Review Your Coaching</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Coaching Near You</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Compare Coaching</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Coaching Quiz</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Coaching Search</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">District Search</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Coaching Rankings</a>
+                                                    <a href="/user/coaching" className="block py-2 text-slate-800 hover:text-amber-500">Parent Resources</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Colleges</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">True Cost</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">Direct Admissions</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">Review Your College</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">College Quiz</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">Admissions Calculator</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">Compare Colleges</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">Scholarships &amp; Financial Aid</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">₹2,000 No Essay Scholarship</a>
+                                                    <a href="/user/colleges" className="block py-2 text-slate-800 hover:text-amber-500">College Search</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Universities</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Browse Universities</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">University Search</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Compare Universities</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Programs &amp; Departments</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Admissions Guidance</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Fees &amp; Scholarships</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Rankings</a>
+                                                    <a href="/user/universities" className="block py-2 text-slate-800 hover:text-amber-500">Hostel &amp; Campus Life</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Institutes</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Browse Institutes</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Institute Search</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Compare Institutes</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Courses &amp; Programs</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Admissions Guidance</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Fees &amp; Offers</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Rankings</a>
+                                                    <a href="/user/institutes" className="block py-2 text-slate-800 hover:text-amber-500">Facilities &amp; Campus</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Students</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Students Home</a>
+                                                    <a href="/user/students/list" className="block py-2 text-slate-800 hover:text-amber-500">Students List</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Top Students</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Find by City</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Find by Class</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Find by Exam</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Performance &amp; Reports</a>
+                                                    <a href="/user/students" className="block py-2 text-slate-800 hover:text-amber-500">Parent Resources</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
