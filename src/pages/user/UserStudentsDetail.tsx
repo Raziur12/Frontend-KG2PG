@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useParams} from 'react-router-dom';
+import React, { useMemo, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import UserLayout from '../../components/UserLayout';
 
 const SEGMENTS = [
@@ -41,11 +41,58 @@ const STAGE_FILTERS: Record<string, { key: string; label: string }[]> = {
 
 const UserStudentsDetail: React.FC = () => {
   const { segment } = useParams<{ segment: string }>();
+  const navigate = useNavigate();
 
   const current = SEGMENTS.find((s) => s.key === segment) ?? SEGMENTS[0];
   const filters = STAGE_FILTERS[current.key] ?? [];
 
   const isCollegeCareer = current.key === 'college-career';
+
+  const subjectOptions = useMemo(
+    () => [
+      'Mathematics',
+      'Physics',
+      'Chemistry',
+      'Biology',
+      'English',
+      'Hindi',
+      'Urdu',
+      'Sanskrit',
+      'Social Science',
+      'Computer',
+    ],
+    [],
+  );
+
+  const [selectedClass, setSelectedClass] = useState(filters[0]?.label ?? '');
+  const [subjects, setSubjects] = useState<string[]>(['Mathematics', 'Physics', 'Chemistry', 'English']);
+  const [error, setError] = useState<string | null>(null);
+
+  const toggleSubject = (sub: string) => {
+    setSubjects((prev) => (prev.includes(sub) ? prev.filter((s) => s !== sub) : [...prev, sub]));
+  };
+
+  const onContinue = () => {
+    if (filters.length > 0 && !selectedClass) {
+      setError('Please choose a class.');
+      return;
+    }
+    if (!isCollegeCareer && subjects.length === 0) {
+      setError('Please choose at least one subject.');
+      return;
+    }
+    setError(null);
+    navigate('/user/students', {
+      state: {
+        startOnboarding: true,
+        prefill: {
+          segment: current.key,
+          studentClass: selectedClass,
+          subjects,
+        },
+      },
+    });
+  };
 
   const cards = isCollegeCareer
     ? [
@@ -90,7 +137,50 @@ const UserStudentsDetail: React.FC = () => {
 
   return (
     <UserLayout>
-      <main className="space-y-6 md:space-y-8">
+      <main className="relative isolate kg-fade-in">
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-[#f6efe9]" />
+          <div className="absolute left-0 right-0 top-0 h-[320px] bg-green-700" />
+          <svg
+            className="absolute left-0 right-0 top-[300px] h-10 w-full"
+            viewBox="0 0 1440 80"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#e6e215ff"
+              d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z"
+            />
+          </svg>
+
+          <div className="absolute left-0 right-0 top-[380px] h-[220px] bg-orange-500" />
+          <svg
+            className="absolute left-0 right-0 top-[580px] h-12 w-full"
+            viewBox="0 0 1440 80"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#052e2b"
+              d="M0,48L80,53.3C160,59,320,69,480,69.3C640,69,800,59,960,53.3C1120,48,1280,48,1360,48L1440,48L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z"
+            />
+          </svg>
+
+          <div className="absolute left-0 right-0 top-[620px] bottom-0 bg-[#052e2b]" />
+          <svg
+            className="absolute left-0 right-0 bottom-0 h-14 w-full"
+            viewBox="0 0 1440 80"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="#f6efe9"
+              d="M0,64L80,58.7C160,53,320,43,480,37.3C640,32,800,32,960,37.3C1120,43,1280,53,1360,58.7L1440,64L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z"
+            />
+          </svg>
+        </div>
+
+        <div className="mx-auto max-w-7xl space-y-6 md:space-y-8 pb-12 px-4 sm:px-6 lg:px-8 pt-5 md:pt-8">
         <section>
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
@@ -100,10 +190,10 @@ const UserStudentsDetail: React.FC = () => {
               >
                 Back
               </Link>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">{current.label}</h1>
+              <h1 className="text-2xl md:text-3xl font-extrabold text-white">{current.label}</h1>
             </div>
           </div>
-          <p className="mt-2 text-sm md:text-base text-gray-600 max-w-3xl">
+          <p className="mt-2 text-sm md:text-base text-emerald-100 max-w-3xl">
             Demo view showing how you can describe programs and support for this stage. Use the left menu to switch
             between different student classes.
           </p>
@@ -118,7 +208,12 @@ const UserStudentsDetail: React.FC = () => {
                 <button
                   key={f.key}
                   type="button"
-                  className="rounded-md px-3 py-1.5 text-xs md:text-sm font-semibold border bg-white text-slate-800 border-slate-200 hover:bg-slate-50"
+                  onClick={() => setSelectedClass(f.label)}
+                  className={`rounded-md px-3 py-1.5 text-xs md:text-sm font-semibold border transition ${
+                    selectedClass === f.label
+                      ? 'bg-amber-50 text-amber-800 border-amber-200'
+                      : 'bg-white text-slate-800 border-slate-200 hover:bg-slate-50'
+                  }`}
                 >
                   {f.label}
                 </button>
@@ -127,18 +222,79 @@ const UserStudentsDetail: React.FC = () => {
           </aside>
 
           {/* Right side cards */}
-          <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {cards.map((c) => (
-              <div key={c.title} className="bg-white rounded-lg border border-gray-100 shadow-sm p-4 md:p-5 flex flex-col">
-                <span className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-700">
-                  {c.badge}
-                </span>
-                <h2 className="mt-2 text-sm md:text-base font-semibold text-gray-900">{c.title}</h2>
-                <p className="mt-1 text-xs md:text-sm text-gray-600">{c.subtitle}</p>
+          <div className="md:col-span-3 space-y-4">
+            <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-4 md:p-5">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+                <div>
+                  <h2 className="text-base md:text-lg font-extrabold text-slate-900">Select class & subjects</h2>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Choose class and subjects first. Next step will be account creation, then institute, plan ₹199 and payment.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={onContinue}
+                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-extrabold text-white hover:bg-slate-800"
+                >
+                  Continue / Create Account
+                </button>
               </div>
-            ))}
+
+              {error && <p className="mt-3 text-sm font-semibold text-rose-600">{error}</p>}
+
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="text-[11px] font-semibold text-slate-500">SELECTED</p>
+                  <p className="mt-1 text-sm font-extrabold text-slate-900">{selectedClass || '—'}</p>
+                  {!isCollegeCareer && <p className="mt-1 text-xs text-slate-600">{subjects.join(', ') || '—'}</p>}
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-white p-4">
+                  <p className="text-[11px] font-semibold text-slate-500">NEXT</p>
+                  <p className="mt-1 text-sm text-slate-700">Account → Institute → Plan ₹199 → Payment → Access</p>
+                </div>
+              </div>
+
+              {!isCollegeCareer && (
+                <div className="mt-4">
+                  <p className="text-[11px] font-semibold text-slate-500">SUBJECTS</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {subjectOptions.map((sub) => {
+                      const active = subjects.includes(sub);
+                      return (
+                        <button
+                          key={sub}
+                          type="button"
+                          onClick={() => toggleSubject(sub)}
+                          className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                            active
+                              ? 'border-amber-300 bg-amber-50 text-amber-800'
+                              : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                          }`}
+                        >
+                          {sub}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {cards.map((c) => (
+                <div key={c.title} className="bg-white rounded-lg border border-gray-100 shadow-sm p-4 md:p-5 flex flex-col">
+                  <span className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-700">
+                    {c.badge}
+                  </span>
+                  <h2 className="mt-2 text-sm md:text-base font-semibold text-gray-900">{c.title}</h2>
+                  <p className="mt-1 text-xs md:text-sm text-gray-600">{c.subtitle}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
+        </div>
       </main>
     </UserLayout>
   );
