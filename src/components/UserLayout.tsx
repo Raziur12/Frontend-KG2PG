@@ -213,6 +213,7 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                                 </div>
                             )}
                         </div>
+
                         <div
                             className="relative"
                             onMouseEnter={() => openMenu('exams', setIsExamsOpen)}
@@ -224,60 +225,68 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                                 onClick={toggleExams}
                             >
                                 <span>Exams &amp; Prep</span>
-                                <span className="ml-1 text-xs">{isExamsOpen ? "▲" : "▼"}</span>
+                                <span className="ml-1 text-xs">{isExamsOpen ? '▲' : '▼'}</span>
                             </button>
+
                             {isExamsOpen && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-slate-200 rounded shadow-lg px-6 py-3 text-sm w-max z-40"
+                                    className="absolute left-1/2 -translate-x-1/2 mt-3 bg-white border border-slate-200 rounded shadow-lg px-6 py-5 text-sm w-[min(980px,calc(100vw-2rem))] z-40"
                                     onMouseEnter={() => openMenu('exams', setIsExamsOpen)}
                                     onMouseLeave={() => closeMenuWithDelay('exams', setIsExamsOpen)}
                                 >
-                                    <div className="flex items-center gap-x-10 whitespace-nowrap">
-                                        <a href="/user/exams/neet" className="block hover:text-amber-500">NEET Courses</a>
-                                        <a href="/user/exams/jee" className="block hover:text-amber-500">JEE Courses</a>
-                                        <a href="/user/exams/other" className="block hover:text-amber-500">CUET / Other Exams</a>
-                                        <a href="/user/exams/test-series" className="block hover:text-amber-500">Test Series</a>
-                                        <a href="/user/exams/ai-doubt-solver" className="block hover:text-amber-500">AI Doubt Solver</a>
-                                        <a href="/user/exams/reports" className="block hover:text-amber-500">Progress &amp; Reports</a>
+                                    <div className="max-h-[70vh] overflow-y-auto pr-1">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-10 gap-y-6">
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">NEET</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/neet" className="block py-2 text-slate-800 hover:text-amber-500">NEET Courses</a>
+                                                    <a href="/user/exams/neet" className="block py-2 text-slate-800 hover:text-amber-500">NEET Syllabus</a>
+                                                    <a href="/user/exams/neet" className="block py-2 text-slate-800 hover:text-amber-500">NEET Mock Tests</a>
+                                                    <a href="/user/exams/neet" className="block py-2 text-slate-800 hover:text-amber-500">NEET Previous Papers</a>
+                                                    <a href="/user/exams/neet" className="block py-2 text-slate-800 hover:text-amber-500">NEET Strategy</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">JEE</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/jee" className="block py-2 text-slate-800 hover:text-amber-500">JEE Courses</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">CUET / Other</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/other" className="block py-2 text-slate-800 hover:text-amber-500">CUET / Other Exams</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Test Series</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/test-series" className="block py-2 text-slate-800 hover:text-amber-500">Test Series</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">AI Doubt Solver</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/ai-doubt-solver" className="block py-2 text-slate-800 hover:text-amber-500">AI Doubt Solver</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Progress</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/exams/reports" className="block py-2 text-slate-800 hover:text-amber-500">Progress &amp; Reports</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
                         </div>
-                        {/* <div className="relative">
-                            <button
-                                type="button"
-                                className="inline-flex items-center text-slate-100/80 hover:text-amber-400 bg-transparent border-0 p-0 m-0 focus:outline-none"
-                                onClick={toggleDashboard}
-                            >
-                                <span>Dashboard</span>
-                                <span className="ml-1 text-xs">{isDashboardOpen ? "▲" : "▼"}</span>
-                            </button>
-                            {isDashboardOpen && (
-                                <div className="absolute left-0 mt-2 bg-slate-900 border border-slate-800 rounded shadow-lg py-2 text-sm min-w-[220px] z-40">
-                                    <a href="/user/dashboard" className="block px-4 py-1 hover:text-amber-400">Student Dashboard</a>
-                                    <a href="/user/dashboard/calendar" className="block px-4 py-1 hover:text-amber-400">Class Calendar</a>
-                                    <a href="/user/dashboard/performance" className="block px-4 py-1 hover:text-amber-400">Performance Reports</a>
-                                    <a href="/user/dashboard/reviews" className="block px-4 py-1 hover:text-amber-400">Ratings &amp; Reviews</a>
-                                </div>
-                            )}
-                        </div> */}
-                        {/* <div className="relative">
-                            <button
-                                type="button"
-                                className="inline-flex items-center text-slate-100/80 hover:text-amber-400 bg-transparent border-0 p-0 m-0 focus:outline-none"
-                                onClick={togglePayments}
-                            >
-                                <span>Payments</span>
-                                <span className="ml-1 text-xs">{isPaymentsOpen ? "▲" : "▼"}</span>
-                            </button>
-                            {isPaymentsOpen && (
-                                <div className="absolute left-0 mt-2 bg-slate-900 border border-slate-800 rounded shadow-lg py-2 text-sm min-w-[220px] z-40">
-                                    <a href="/user/payments" className="block px-4 py-1 hover:text-amber-400">My Payments / Orders</a>
-                                    <a href="/user/payments/subscriptions" className="block px-4 py-1 hover:text-amber-400">Subscriptions</a>
-                                    <a href="/user/payments/invoices" className="block px-4 py-1 hover:text-amber-400">Invoices &amp; Receipts</a>
-                                </div>
-                            )}
-                        </div> */}
+
                         <div
                             className="relative"
                             onMouseEnter={() => openMenu('resources', setIsResourcesOpen)}
@@ -291,20 +300,65 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children }) => {
                                 <span>Resources</span>
                                 <span className="ml-1 text-xs">{isResourcesOpen ? "▲" : "▼"}</span>
                             </button>
+
                             {isResourcesOpen && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-slate-200 rounded shadow-lg px-6 py-3 text-sm w-max z-40"
+                                    className="absolute left-1/2 -translate-x-1/2 mt-3 bg-white border border-slate-200 rounded shadow-lg px-6 py-5 text-sm w-[min(980px,calc(100vw-2rem))] z-40"
                                     onMouseEnter={() => openMenu('resources', setIsResourcesOpen)}
                                     onMouseLeave={() => closeMenuWithDelay('resources', setIsResourcesOpen)}
                                 >
-                                    <div className="flex items-center gap-x-10 whitespace-nowrap">
-                                        <a href="/user/resources/videos" className="block hover:text-amber-500">Recorded Videos</a>
-                                        <a href="/user/resources/notes" className="block hover:text-amber-500">PDF Notes</a>
-                                        <a href="/user/resources/downloads" className="block hover:text-amber-500">Downloads</a>
+                                    <div className="max-h-[70vh] overflow-y-auto pr-1">
+                                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-10 gap-y-6">
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Resources</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources" className="block py-2 text-slate-800 hover:text-amber-500">Resources Home</a>
+                                                    <a href="/user/resources/videos" className="block py-2 text-slate-800 hover:text-amber-500">Recorded Videos</a>
+                                                    <a href="/user/resources/notes" className="block py-2 text-slate-800 hover:text-amber-500">PDF Notes</a>
+                                                    <a href="/user/resources/downloads" className="block py-2 text-slate-800 hover:text-amber-500">Downloads</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Videos</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources/videos" className="block py-2 text-slate-800 hover:text-amber-500">All Videos</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Notes</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources/notes" className="block py-2 text-slate-800 hover:text-amber-500">All Notes</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Downloads</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources/downloads" className="block py-2 text-slate-800 hover:text-amber-500">All Downloads</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Practice</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources" className="block py-2 text-slate-800 hover:text-amber-500">Question Bank</a>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-[11px] font-extrabold tracking-widest text-slate-700 uppercase border-b border-slate-200 pb-2">Guides</div>
+                                                <div className="mt-3 flex flex-col">
+                                                    <a href="/user/resources" className="block py-2 text-slate-800 hover:text-amber-500">Study Guides</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
                         </div>
+
                         <div
                             className="relative"
                             onMouseEnter={() => openMenu('support', setIsSupportOpen)}
